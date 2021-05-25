@@ -129,7 +129,7 @@ struct mf_ctx {
  * away.  Some GCC versions gave warnings on ALWAYS_INLINE, so these are
  * defined as macros. */
 
-#if (FLOW_WC_SEQ != 42)
+#if (FLOW_WC_SEQ != 43)
 #define MINIFLOW_ASSERT(X) ovs_assert(X)
 BUILD_MESSAGE("FLOW_WC_SEQ changed: miniflow_extract() will have runtime "
                "assertions enabled. Consider updating FLOW_WC_SEQ after "
@@ -731,7 +731,7 @@ void
 miniflow_extract(struct dp_packet *packet, struct miniflow *dst)
 {
     /* Add code to this function (or its callees) to extract new fields. */
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
 
     const struct pkt_metadata *md = &packet->md;
     const void *data = dp_packet_data(packet);
@@ -1187,7 +1187,7 @@ flow_get_metadata(const struct flow *flow, struct match *flow_metadata)
 {
     int i;
 
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
 
     match_init_catchall(flow_metadata);
     if (flow->tunnel.tun_id != htonll(0)) {
@@ -1773,7 +1773,7 @@ flow_wildcards_init_for_packet(struct flow_wildcards *wc,
     memset(&wc->masks, 0x0, sizeof wc->masks);
 
     /* Update this function whenever struct flow changes. */
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
 
     if (flow_tnl_dst_is_set(&flow->tunnel)) {
         if (flow->tunnel.flags & FLOW_TNL_F_KEY) {
@@ -1926,7 +1926,7 @@ void
 flow_wc_map(const struct flow *flow, struct flowmap *map)
 {
     /* Update this function whenever struct flow changes. */
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
 
     flowmap_init(map);
 
@@ -2029,7 +2029,7 @@ void
 flow_wildcards_clear_non_packet_fields(struct flow_wildcards *wc)
 {
     /* Update this function whenever struct flow changes. */
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
 
     memset(&wc->masks.metadata, 0, sizeof wc->masks.metadata);
     memset(&wc->masks.regs, 0, sizeof wc->masks.regs);
@@ -2173,7 +2173,7 @@ flow_wildcards_set_xxreg_mask(struct flow_wildcards *wc, int idx,
 uint32_t
 miniflow_hash_5tuple(const struct miniflow *flow, uint32_t basis)
 {
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
     uint32_t hash = basis;
 
     if (flow) {
@@ -2210,7 +2210,7 @@ miniflow_hash_5tuple(const struct miniflow *flow, uint32_t basis)
         hash = hash_add(hash, (OVS_FORCE uint32_t) miniflow_get_ports(flow));
     }
 out:
-    return hash_finish(hash, 42);
+    return hash_finish(hash, 43);
 }
 
 ASSERT_SEQUENTIAL_SAME_WORD(tp_src, tp_dst);
@@ -2220,7 +2220,7 @@ ASSERT_SEQUENTIAL(ipv6_src, ipv6_dst);
 uint32_t
 flow_hash_5tuple(const struct flow *flow, uint32_t basis)
 {
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
     uint32_t hash = basis;
 
     if (flow) {
@@ -2254,7 +2254,7 @@ flow_hash_5tuple(const struct flow *flow, uint32_t basis)
                                                  / sizeof(uint32_t)]);
     }
 out:
-    return hash_finish(hash, 42); /* Arbitrary number. */
+    return hash_finish(hash, 43); /* Arbitrary number. */
 }
 
 /* Hashes 'flow' based on its L2 through L4 protocol information. */
@@ -2898,7 +2898,7 @@ flow_push_mpls(struct flow *flow, int n, ovs_be16 mpls_eth_type,
 
         if (clear_flow_L3) {
             /* Clear all L3 and L4 fields and dp_hash. */
-            BUILD_ASSERT(FLOW_WC_SEQ == 42);
+            BUILD_ASSERT(FLOW_WC_SEQ == 43);
             memset((char *) flow + FLOW_SEGMENT_2_ENDS_AT, 0,
                    sizeof(struct flow) - FLOW_SEGMENT_2_ENDS_AT);
             flow->dp_hash = 0;
@@ -3196,7 +3196,7 @@ flow_compose(struct dp_packet *p, const struct flow *flow,
     /* Add code to this function (or its callees) for emitting new fields or
      * protocols.  (This isn't essential, so it can be skipped for initial
      * testing.) */
-    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 42);
+    BUILD_ASSERT_DECL(FLOW_WC_SEQ == 43);
 
     uint32_t pseudo_hdr_csum;
     size_t l4_len;
