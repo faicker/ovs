@@ -43,7 +43,7 @@ enum sw_flow_mac_proto {
 	MAC_PROTO_ETHERNET,
 };
 #define SW_FLOW_KEY_INVALID	0x80
-#define MPLS_LABEL_DEPTH       3
+#define MPLS_LABEL_DEPTH       9
 
 /* Store options at the end of the array if they are less than the
  * maximum size. This allows us to get the benefits of variable length

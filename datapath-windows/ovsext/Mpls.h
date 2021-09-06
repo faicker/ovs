@@ -23,7 +23,7 @@
 /*
  * MPLS definitions
  */
-#define FLOW_MAX_MPLS_LABELS    3
+#define FLOW_MAX_MPLS_LABELS    9
 
 #define MPLS_HLEN               4
 #define MPLS_BOS_MASK           0x00000100
